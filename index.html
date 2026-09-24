@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruta de Trabajos de Grado · Maestría en Innovación Educativa</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<style>
+:root{
+  --navy:#13264B;
+  --navy-deep:#0B1934;
+  --navy-soft:#2B4274;
+  --white:#FFFFFF;
+  --gray-50:#F3F4F7;
+  --gray-100:#E7E9EE;
+  --gray-300:#C3C8D2;
+  --gray-600:#5B6272;
+  --ink:#000000;
+  --serif:"Times New Roman", Times, "Liberation Serif", "Nimbus Roman", serif;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--gray-50);color:var(--ink);
+  font-family:var(--serif);font-size:1.125rem;line-height:1.6;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+a{color:var(--navy)}
+:focus-visible{outline:3px solid #7FA3E0;outline-offset:2px}
+
+/* ---------- Portada ---------- */
+.hero{background:var(--navy);color:var(--white);position:relative;overflow:hidden}
+.hero::after{ /* textura sutil de pauta */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 34px);
+}
+.hero-inner{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:3.5rem 1.5rem 2.5rem}
+.inst{margin:0 0 1.75rem;font-size:1rem;color:#C9D3E6;letter-spacing:.02em}
+.inst strong{color:var(--white);font-weight:normal;display:block;font-size:1.15rem}
+.hero h1{
+  margin:0;font-weight:normal;line-height:.95;
+  font-size:clamp(2.8rem,7vw,5.4rem);letter-spacing:-.015em;max-width:15ch;
+}
+.hero .rule{width:88px;height:3px;background:var(--white);margin:1.75rem 0 1.5rem}
+.intro{max-width:68ch;font-size:1.2rem;line-height:1.7;color:#EEF2F9}
+.intro p{margin:0 0 1rem}
+
+/* Recorrido: el elemento memorable */
+.route{margin-top:2.75rem;border-top:1px solid rgba(255,255,255,.22);padding-top:1.75rem}
+.route-title{margin:0 0 1.25rem;font-size:1rem;color:#C9D3E6;font-style:italic}
+.route-line{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.route-line::before{content:"";position:absolute;left:14px;right:calc(33.333% - 14px);top:13px;height:2px;background:rgba(255,255,255,.45)}
+.route-line li{position:relative;padding-right:1rem}
+.station{
+  all:unset;cursor:pointer;display:block;color:var(--white);
+}
+.station .dot{
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--white);background:var(--navy);
+  display:grid;place-items:center;font-size:.85rem;position:relative;z-index:1;transition:background .2s,color .2s;
+}
+.station:hover .dot,.station:focus-visible .dot{background:var(--white);color:var(--navy)}
+.station .name{display:block;margin-top:.75rem;font-size:1.3rem}
+.station .desc{display:block;font-size:.98rem;color:#C9D3E6;max-width:26ch;line-height:1.4}
+.station .sem{display:block;font-size:.9rem;color:#9FB0CF;font-style:italic;margin-top:.2rem}
+
+/* ---------- Pestañas principales ---------- */
+.tabs-main{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--gray-300);box-shadow:0 1px 0 var(--gray-100)}
+.tabs-main .wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem;display:flex;gap:.5rem;overflow-x:auto}
+.tab-main{white-space:nowrap}
+.tab-main{
+  appearance:none;border:0;background:none;cursor:pointer;font-family:var(--serif);
+  font-size:1.2rem;color:var(--gray-600);padding:1.1rem .9rem 1rem;border-bottom:3px solid transparent;margin-bottom:-1px;
+}
+.tab-main[aria-selected="true"]{color:var(--navy);border-bottom-color:var(--navy)}
+.tab-main:hover{color:var(--navy)}
+
+main{max-width:1180px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.panel[hidden]{display:none}
+
+/* Sub-pestañas */
+.subtabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 2rem;padding:.35rem;background:var(--gray-100);border-radius:6px;width:fit-content;max-width:100%}
+.subtab{
+  appearance:none;border:0;cursor:pointer;font-family:var(--serif);font-size:1.02rem;
+  padding:.55rem 1rem;border-radius:4px;background:transparent;color:#1d1d1d;
+}
+.subtab:hover{background:rgba(19,38,75,.08)}
+.subtab[aria-selected="true"]{background:var(--navy);color:var(--white)}
+.subpanel[hidden]{display:none}
+
+/* Tipografía de contenido */
+.lead-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:end;border-bottom:1px solid var(--gray-300);padding-bottom:1.25rem;margin-bottom:2rem}
+h2{font-weight:normal;font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.1;margin:0;color:var(--navy)}
+.kicker{margin:0 0 .4rem;color:var(--gray-600);font-style:italic}
+.meta{text-align:right;color:var(--gray-600);font-size:.98rem;line-height:1.4}
+h3{font-weight:normal;font-size:1.45rem;color:var(--navy);margin:2.5rem 0 1rem}
+h4{font-weight:bold;font-size:1.05rem;margin:0 0 .5rem}
+p{margin:0 0 1rem}
+.prose{max-width:74ch;text-align:justify;hyphens:auto}
+.muted{color:var(--gray-600)}
+
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:start}
+.box{background:var(--white);border:1px solid var(--gray-100);border-left:4px solid var(--navy);padding:1.25rem 1.4rem;border-radius:0 6px 6px 0}
+.box ul{margin:.25rem 0 0;padding-left:1.1rem}
+.box li{margin:.3rem 0}
+.box.gray{border-left-color:var(--gray-600);background:var(--gray-100)}
+
+/* Entregas: secuencia real, por eso numeradas */
+.entregas{list-style:none;margin:0;padding:0;counter-reset:e}
+.entrega{display:grid;grid-template-columns:72px minmax(0,1fr);gap:1.25rem;padding:1.4rem 0;border-top:1px solid var(--gray-300)}
+.entrega:last-child{border-bottom:1px solid var(--gray-300)}
+.entrega .num{font-size:3rem;line-height:.9;color:var(--navy)}
+.entrega .num small{display:block;font-size:.85rem;color:var(--gray-600);font-style:italic;margin-top:.35rem}
+.entrega h4{font-size:1.2rem;font-weight:normal;color:var(--navy);margin:0 0 .35rem}
+.entrega .what{margin:0 0 .5rem;font-style:italic}
+.entrega ul{margin:0;padding-left:1.1rem;columns:2;column-gap:2rem}
+.entrega li{break-inside:avoid;margin:.15rem 0}
+
+/* Fases */
+.fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.fase{background:var(--white);border:1px solid var(--gray-100);border-radius:6px;padding:1.2rem 1.3rem}
+.fase .tag{display:inline-block;font-size:.88rem;background:var(--navy);color:var(--white);padding:.1rem .55rem;border-radius:3px;margin-bottom:.6rem}
+.fase .tag.partial{background:var(--white);color:var(--navy);border:1px solid var(--navy)}
+.fase h4{font-weight:normal;font-size:1.2rem;color:var(--navy)}
+.fase ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:1.02rem}
+
+/* Tablas */
+.table-wrap{overflow-x:auto;border:1px solid var(--gray-300);border-radius:6px;background:var(--white)}
+table{border-collapse:collapse;width:100%;font-size:1rem}
+th,td{padding:.75rem .9rem;vertical-align:top;text-align:left;border-bottom:1px solid var(--gray-100)}
+thead th{background:var(--navy);color:var(--white);font-weight:normal;font-size:1.02rem;position:sticky;top:0}
+tbody tr:nth-child(even) td{background:var(--gray-50)}
+td ul{margin:0;padding-left:1rem}
+td li{margin:.15rem 0}
+th[scope="row"]{color:var(--navy);font-weight:bold;background:var(--white)}
+
+/* Diseños */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.25rem}
+.chip{appearance:none;font-family:var(--serif);font-size:.98rem;cursor:pointer;border:1px solid var(--gray-300);background:var(--white);color:var(--ink);padding:.35rem .85rem;border-radius:999px}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.designs{display:grid;grid-template-columns:320px minmax(0,1fr);gap:1.75rem;align-items:start}
+.design-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--gray-300);position:sticky;top:84px}
+.design-btn{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;padding:.9rem .9rem .9rem 1rem;border-bottom:1px solid var(--gray-300);border-left:3px solid transparent}
+.design-btn .enf{display:block;font-size:.88rem;color:var(--gray-600);font-style:italic}
+.design-btn .dn{display:block;font-size:1.08rem;line-height:1.3}
+.design-btn:hover{background:var(--white)}
+.design-btn[aria-current="true"]{background:var(--white);border-left-color:var(--navy)}
+.design-btn[aria-current="true"] .dn{color:var(--navy)}
+.design-detail{background:var(--white);border:1px solid var(--gray-100);border-radius:6px;padding:1.75rem 2rem}
+.design-detail .enf{color:var(--gray-600);font-style:italic;margin:0}
+.design-detail h3{margin:.2rem 0 1rem;font-size:1.8rem}
+.design-detail .summary ul{list-style:none;padding:0;margin:0}
+.design-detail .summary{font-size:1.1rem;border-left:3px solid var(--gray-300);padding-left:1rem;margin-bottom:1.5rem}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 2rem}
+.fact{border-top:2px solid var(--navy);padding-top:.7rem}
+.fact.wide{grid-column:1/-1}
+.fact.alert{border-top-color:var(--gray-600);background:var(--gray-50);padding:.8rem 1rem 1rem;border-radius:0 0 6px 6px}
+.fact h4{color:var(--navy);font-weight:normal;font-size:1.1rem;font-style:italic}
+.fact ul{margin:0;padding-left:1.1rem;font-size:1.02rem}
+.fact li{margin:.3rem 0}
+.fact p{font-size:1.02rem}
+.matrix-toggle{margin:2.5rem 0 1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn{appearance:none;cursor:pointer;font-family:var(--serif);font-size:1.02rem;background:var(--navy);color:var(--white);border:0;border-radius:4px;padding:.6rem 1.1rem}
+.btn.ghost{background:var(--white);color:var(--navy);border:1px solid var(--navy)}
+.matrix table{min-width:1900px;font-size:.95rem}
+.matrix td:first-child,.matrix th:first-child{position:sticky;left:0;z-index:2;background:var(--white);box-shadow:1px 0 0 var(--gray-300)}
+.matrix thead th:first-child{background:var(--navy);z-index:3}
+.avoid{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
+.avoid li{background:var(--white);border:1px solid var(--gray-100);border-left:4px solid var(--gray-600);padding:1rem 1.2rem;border-radius:0 6px 6px 0}
+
+/* Directores */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.trio .box h4{font-weight:normal;color:var(--navy);font-size:1.15rem}
+.criteria{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.role{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2rem;align-items:start}
+.role .purpose{font-size:1.3rem;line-height:1.45;color:var(--navy);margin:0 0 1.5rem;max-width:40ch}
+.funcs{list-style:none;margin:0;padding:0;counter-reset:f}
+.funcs li{position:relative;padding:.85rem 0 .85rem 2.4rem;border-top:1px solid var(--gray-300)}
+.funcs li:last-child{border-bottom:1px solid var(--gray-300)}
+.funcs li::before{content:"";position:absolute;left:.4rem;top:1.35rem;width:12px;height:12px;border:2px solid var(--navy);border-radius:50%}
+.aside{background:var(--navy);color:var(--white);border-radius:6px;padding:1.4rem 1.5rem}
+.aside h4{font-weight:normal;font-style:italic;color:#C9D3E6}
+.aside p{margin:0}
+.compare{margin-top:2.5rem}
+figure{margin:0}
+.figure-frame{background:var(--white);border:1px solid var(--gray-300);border-radius:6px;padding:1rem;text-align:center}
+.figure-frame img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{margin-top:.75rem;color:var(--gray-600);font-style:italic}
+.img-missing{padding:3rem 1.5rem;color:var(--gray-600);border:2px dashed var(--gray-300);border-radius:6px}
+.img-missing code{font-family:var(--serif);background:var(--gray-100);padding:.1rem .35rem;border-radius:3px;color:var(--ink)}
+
+/* Pie */
+footer{background:var(--navy-deep);color:var(--white);text-align:center;padding:2.25rem 1.5rem calc(2.25rem + env(safe-area-inset-bottom,0px))}
+footer p{margin:.2rem 0}
+footer .author{font-size:1.15rem}
+footer .rights{color:#AFBBD3;font-size:.98rem}
+
+/* Responsive */
+@media (max-width:900px){
+  .two,.designs,.role,.criteria{grid-template-columns:1fr}
+  .trio{grid-template-columns:1fr}
+  .design-list{position:static}
+  .facts{grid-template-columns:1fr}
+  .entrega ul{columns:1}
+  .lead-head{grid-template-columns:1fr}
+  .meta{text-align:left}
+}
+@media (max-width:640px){
+  .route-line{grid-template-columns:1fr;gap:1.25rem}
+  .route-line::before{left:13px;right:auto;top:14px;bottom:14px;width:2px;height:auto}
+  .route-line li{display:block}
+  .station{display:grid;grid-template-columns:28px 1fr;column-gap:1rem}
+  .station .name{margin-top:0}
+  .station .name,.station .sem,.station .desc{grid-column:2}
+  .tab-main{font-size:1.05rem;padding:.9rem .5rem}
+  .entrega{grid-template-columns:1fr;gap:.5rem}
+  .design-detail{padding:1.25rem}
+  .prose{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.tabs-main,.subtabs,.filters,.matrix-toggle{display:none}.panel[hidden],.subpanel[hidden]{display:block!important}}
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     VENTANA INICIAL
+     ===================================================== -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="inst"><strong>Maestría en Innovación Educativa</strong>Escuela de Educación e Innovación, Politécnico Grancolombiano</p>
+    <h1>Ruta de Trabajos de Grado</h1>
+    <div class="rule" aria-hidden="true"></div>
+
+    <!-- ✏️ EDITA AQUÍ: reemplaza este texto introductorio por el definitivo -->
+    <div class="intro">
+      <p>La Ruta de Trabajos de Grado orienta a estudiantes, tutores/as, directores/as y coasesores/as de la Maestría en Innovación Educativa en el desarrollo del trabajo de grado como un proceso investigativo aplicado, flexible y contextualizado. Organiza el recorrido formativo en tres espacios académicos, Seminario I, Seminario II y Trabajo de Grado, en los que el estudiante diseña, implementa y evalúa una innovación educativa en un contexto real.</p>
+      <p>En esta guía encontrará la estructura del trabajo de grado en cada espacio, los diseños metodológicos viables para aulas con muestras pequeñas y la forma en que se organiza el acompañamiento de dirección en equipos de codirección.</p>
+    </div>
+    <!-- fin del texto editable -->
+
+    <nav class="route" aria-label="Recorrido formativo">
+      <p class="route-title">El recorrido formativo</p>
+      <ol class="route-line">
+        <li><button class="station" data-go="estructura/sem1"><span class="dot">1</span><span class="name">Seminario I</span><span class="sem">Primer semestre</span><span class="desc">Iniciación y fundamentación del proyecto</span></button></li>
+        <li><button class="station" data-go="estructura/sem2"><span class="dot">2</span><span class="name">Seminario II</span><span class="sem">Segundo semestre</span><span class="desc">Desarrollo metodológico e inicio de implementación</span></button></li>
+        <li><button class="station" data-go="estructura/tg"><span class="dot">3</span><span class="name">Trabajo de Grado</span><span class="sem">Tercer semestre</span><span class="desc">Implementación, análisis y cierre</span></button></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<!-- =====================================================
+     PESTAÑAS PRINCIPALES
+     ===================================================== -->
+<div class="tabs-main">
+  <div class="wrap" role="tablist" aria-label="Secciones">
+    <button class="tab-main" role="tab" id="t-estructura" aria-controls="p-estructura" data-tab="estructura">Estructura del trabajo de grado</button>
+    <button class="tab-main" role="tab" id="t-directores" aria-controls="p-directores" data-tab="directores">Directores de trabajo de grado</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ ESTRUCTURA DEL TRABAJO DE GRADO ============ -->
+<section class="panel" id="p-estructura" role="tabpanel" aria-labelledby="t-estructura">
+  <div class="subtabs" role="tablist" aria-label="Estructura del trabajo de grado">
+    <button class="subtab" role="tab" data-sub="sem1">Seminario I</button>
+    <button class="subtab" role="tab" data-sub="sem2">Seminario II</button>
+    <button class="subtab" role="tab" data-sub="tg">Trabajo de Grado</button>
+    <button class="subtab" role="tab" data-sub="disenos">Diseños para los estudios</button>
+  </div>
+
+  <!-- Seminario I -->
+  <article class="subpanel" data-subpanel="sem1">
+    <div class="lead-head">
+      <div><p class="kicker">Primer semestre</p><h2>Seminario I: iniciación y fundamentación del proyecto</h2></div>
+      <p class="meta">Capítulo 1. Problematización y conceptualización<br>Capítulo 2. Marco metodológico (30 %)</p>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>En Seminario I el estudiante evalúa y selecciona la línea de investigación, delimita el problema educativo a partir de la literatura y de la información de su contexto, y construye un anteproyecto inicial. En este espacio se elige, de manera preliminar, el diseño metodológico que mejor se ajusta a las condiciones reales del aula.</p>
+        <p>Desde este primer momento se integran las consideraciones éticas: análisis de riesgos, uso de datos, responsabilidad investigativa y alcances de la intervención, según el lineamiento del Comité de Ética en Investigación (CEI-EEI).</p>
+      </div>
+      <div class="box">
+        <h4>Acompañamiento</h4>
+        <p>Tutor/a del módulo, quien evalúa las entregas conforme a las rúbricas institucionales.</p>
+        <h4>Módulos de apoyo</h4>
+        <p style="margin:0">Investigación de la innovación educativa e Investigación 1.</p>
+      </div>
+    </div>
+
+    <h3>Fases de la ruta metodológica en este espacio</h3>
+    <div class="fases">
+      <div class="fase"><span class="tag">Fase 1 completa</span><h4>Diagnóstico y delimitación del problema</h4>
+        <ul><li>Caracterizar el aula: tipo, número de estudiantes, nivel de logro previo y contexto socioeducativo.</li><li>Identificar la necesidad pedagógica que justifica la innovación y enunciarla en coherencia con una línea de investigación.</li><li>Formular la tesis o pregunta inicial y revisar antecedentes.</li></ul></div>
+      <div class="fase"><span class="tag partial">Fase 2 inicial</span><h4>Diseño de la intervención y de los instrumentos</h4>
+        <ul><li>Seleccionar con el tutor/a el enfoque y el diseño de la matriz que mejor se ajuste al aula.</li><li>Construir la primera versión del diseño metodológico, incluidos los aspectos éticos.</li></ul></div>
+    </div>
+
+    <h3>Entregas</h3>
+    <ol class="entregas" id="entregas-sem1"></ol>
+
+    <h3>Entregables y valoración</h3>
+    <div class="box gray"><ul>
+      <li>Documento de avance del anteproyecto: línea de investigación seleccionada y delimitación del problema basada en la literatura y la información contextual. Primer avance en la semana 8 (100 pt), segundo avance en la semana 12 (100 pt) y entrega final en la semana 15 (200 pt).</li>
+      <li>Participación en coloquio en la semana 14 (100 pt).</li>
+    </ul></div>
+  </article>
+
+  <!-- Seminario II -->
+  <article class="subpanel" data-subpanel="sem2" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Segundo semestre</p><h2>Seminario II: desarrollo metodológico e inicio de implementación</h2></div>
+      <p class="meta">Capítulo 3. Marco metodológico al 100 %<br>y descripción de la implementación de instrumentos</p>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>En Seminario II el estudiante consolida la revisión de literatura y la delimitación del problema, define la pregunta de investigación, los objetivos y el método, y completa el anteproyecto. El diseño metodológico se detalla por completo: tipo y diseño de investigación, participantes, técnicas e instrumentos, intervención y estrategias de análisis.</p>
+        <p>El protocolo de investigación debe ser aprobado por el CEI-EEI antes de cualquier medición o intervención con participantes. Una vez aprobado, es recomendable aplicar la línea base o el pretest en este mismo semestre, para disponer de tiempo suficiente de análisis en Trabajo de Grado.</p>
+      </div>
+      <div class="box">
+        <h4>Acompañamiento</h4>
+        <p>Tutor/a del módulo y Comité de Ética en Investigación de la Escuela (CEI-EEI).</p>
+        <h4>Al cierre del semestre</h4>
+        <p style="margin:0">Se asigna el equipo de dirección de trabajo de grado.</p>
+      </div>
+    </div>
+
+    <h3>Fases de la ruta metodológica en este espacio</h3>
+    <div class="fases">
+      <div class="fase"><span class="tag">Fase 2 completa</span><h4>Diseño de la intervención y de los instrumentos</h4>
+        <ul><li>Confirmar el diseño y verificar si el tamaño del grupo sostiene el análisis de grupo o conviene migrar a caso único.</li><li>Definir la mediación tecnológica o metodológica que constituye la innovación.</li><li>Seleccionar o adaptar instrumentos y definir estrategias de análisis.</li><li>Establecer el calendario de mediciones y diligenciar el protocolo ético.</li></ul></div>
+      <div class="fase"><span class="tag partial">Inicio de la Fase 3</span><h4>Implementación pedagógica</h4>
+        <ul><li>Aplicar la línea base, el pretest o las primeras mediciones, solo después de la aprobación ética.</li><li>Describir la implementación inicial en el documento final del seminario.</li></ul></div>
+    </div>
+
+    <h3>Entregas</h3>
+    <ol class="entregas" id="entregas-sem2"></ol>
+
+    <h3>Entregables y valoración</h3>
+    <div class="box gray"><ul>
+      <li>Informe ejecutivo de consideraciones éticas aprobado por el Comité de Investigación y Ética de la Escuela de Educación e Innovación (semana 8, 100 pt).</li>
+      <li>Anteproyecto aprobado, con método, por el tutor/a en el marco del seminario (semana 12, 150 pt; final en la semana 15, 150 pt).</li>
+      <li>Participación en coloquio (semana 14, 100 pt).</li>
+    </ul></div>
+  </article>
+
+  <!-- Trabajo de Grado -->
+  <article class="subpanel" data-subpanel="tg" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Tercer semestre</p><h2>Trabajo de Grado: implementación, análisis y cierre</h2></div>
+      <p class="meta">Capítulo 4. Análisis y resultados<br>Capítulo 5. Conclusiones y recomendaciones</p>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>En Trabajo de Grado el estudiante completa la implementación, recolecta y analiza la información, y finaliza y sustenta el trabajo. El documento final se organiza en la plantilla estandarizada y en estructura IMRyD, con normas APA 7.ª edición, y se revisa en la plataforma de coincidencias Compilatio.</p>
+        <p>Se recomienda cerrar la implementación antes de la entrega 1 (semana 8), que exige resultados preliminares.</p>
+      </div>
+      <div class="box">
+        <h4>Acompañamiento</h4>
+        <p>Tutor/a del módulo, en lo formativo y evaluativo, y el equipo de dirección: director/a y coasesor/a.</p>
+        <h4>Anexos de entrega</h4>
+        <p style="margin:0">Autorización de uso de contenido, descripción de documentos para el repositorio y formato EEI para entrega de documento.</p>
+      </div>
+    </div>
+
+    <h3>Fases de la ruta metodológica en este espacio</h3>
+    <div class="fases">
+      <div class="fase"><span class="tag partial">Cierre de la Fase 3</span><h4>Implementación pedagógica</h4>
+        <ul><li>Mantener constante el instrumento, el aplicador y el protocolo de registro.</li><li>Llevar un diario de acontecimientos paralelos del aula y la institución.</li><li>Documentar cambios para reportarlos como limitación.</li></ul></div>
+      <div class="fase"><span class="tag">Fase 4 completa</span><h4>Recolección y análisis de datos</h4>
+        <ul><li>Consolidar mediciones y codificar datos cualitativos.</li><li>Aplicar el análisis correspondiente al diseño y contrastarlo con las amenazas a la validez.</li><li>Elaborar la matriz de convergencia si el diseño es mixto.</li></ul></div>
+      <div class="fase"><span class="tag">Fase 5 completa</span><h4>Discusión, limitaciones e informe final</h4>
+        <ul><li>Interpretar resultados sin generalizaciones no sustentadas.</li><li>Declarar las limitaciones propias del diseño.</li><li>Redactar el informe y preparar la sustentación.</li></ul></div>
+    </div>
+
+    <h3>Entregas</h3>
+    <ol class="entregas" id="entregas-tg"></ol>
+
+    <h3>Entregables y valoración</h3>
+    <div class="box gray"><ul>
+      <li>Documento de informe final del proyecto de grado: resultados y análisis preliminar (semana 8, 100 pt) e informe final (semana 12, 150 pt).</li>
+      <li>Artículo publicable o producto de divulgación, si aplica (producto final, semana 15, 150 pt).</li>
+      <li>Participación en coloquio con sustentación final (semana 14, 100 pt).</li>
+    </ul></div>
+  </article>
+
+  <!-- Diseños para los estudios -->
+  <article class="subpanel" data-subpanel="disenos" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Posibilidades metodológicas</p><h2>Diseños para los estudios</h2></div>
+      <p class="meta">Aulas únicas, sin asignación aleatoria<br>y con tiempos cortos de medición</p>
+    </div>
+    <div class="prose">
+      <p>Los contextos habituales de implementación son aulas de colegios públicos, unidocentes o multigrado rurales, o aulas por grado en zonas rurales o urbanas, con un máximo aproximado de 30 estudiantes y un tiempo de implementación que rara vez supera uno o dos meses. Por eso, esta matriz reúne diseños metodológicamente defendibles en esas condiciones. Cuando el grupo tiene menos de 10 estudiantes, conviene migrar al diseño de caso único con línea de base múltiple, sólido incluso con un solo estudiante.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filtrar por enfoque" id="filters"></div>
+    <div class="designs">
+      <ul class="design-list" id="design-list"></ul>
+      <div class="design-detail" id="design-detail" aria-live="polite"></div>
+    </div>
+
+    <div class="matrix-toggle">
+      <button class="btn ghost" id="toggle-matrix" aria-expanded="false" aria-controls="matrix">Ver la matriz completa</button>
+      <span class="muted">La tabla se desplaza horizontalmente.</span>
+    </div>
+    <div class="matrix" id="matrix" hidden><div class="table-wrap"><table id="matrix-table"></table></div></div>
+
+    <h3>Qué evitar en este contexto</h3>
+    <ul class="avoid" id="avoid"></ul>
+  </article>
+</section>
+
+<!-- ============ DIRECTORES DE TRABAJO DE GRADO ============ -->
+<section class="panel" id="p-directores" role="tabpanel" aria-labelledby="t-directores" hidden>
+  <div class="subtabs" role="tablist" aria-label="Directores de trabajo de grado">
+    <button class="subtab" role="tab" data-sub="asesoria">¿Qué es la asesoría?</button>
+    <button class="subtab" role="tab" data-sub="asignacion">Asignación de directores</button>
+    <button class="subtab" role="tab" data-sub="director">Funciones del director/a</button>
+    <button class="subtab" role="tab" data-sub="coasesor">Funciones del coasesor/a</button>
+    <button class="subtab" role="tab" data-sub="estructura-img">Estructura de los equipos</button>
+  </div>
+
+  <article class="subpanel" data-subpanel="asesoria">
+    <div class="lead-head">
+      <div><p class="kicker">La dirección de trabajo de grado en equipo</p><h2>La asesoría como parte del proceso formativo</h2></div>
+    </div>
+    <div class="prose">
+      <p>En la Maestría en Innovación Educativa, la dirección del trabajo de grado hace parte de la ruta formativa de investigación y acompaña al estudiante desde la formulación del problema hasta la sustentación. Cada trabajo cuenta con un equipo de dirección. El director/a orienta las decisiones metodológicas y conceptuales e interviene en los momentos decisivos: aprobación del diseño, del análisis y de la versión final. El coasesor/a realiza el seguimiento cercano del avance, de la implementación en el aula y de la escritura.</p>
+      <p>Como los equipos se organizan según las líneas de investigación del programa, el estudiante recibe acompañamiento de profesores que conocen su campo temático. Esta forma de trabajo le ofrece dos miradas complementarias sobre su proyecto y un acompañamiento más frecuente. Así se reduce el riesgo de que el proceso se estanque y se fortalece la coherencia entre el problema, la innovación que implementa en el aula y los resultados. La definición de roles desde el inicio previene riesgos propios del trabajo en equipo, como la dependencia o la superposición de funciones. Además, esta organización permite que los docentes con menos experiencia aprendan a dirigir junto a colegas de mayor trayectoria, práctica que la literatura sobre codirección reconoce como favorable para la calidad de la supervisión.</p>
+    </div>
+    <h3>Tres saberes que reúne cada equipo</h3>
+    <div class="trio">
+      <div class="box"><h4>Rigor metodológico</h4><p style="margin:0">Experiencia en diseños cuantitativos, cualitativos y mixtos, validación de instrumentos y evaluación de intervenciones, para que la implementación se convierta en evidencia defendible.</p></div>
+      <div class="box"><h4>Pertinencia disciplinar</h4><p style="margin:0">Profesores de un mismo campo que orientan sobre qué enseñar y cómo, no solo sobre cómo investigar.</p></div>
+      <div class="box"><h4>Cercanía al aula</h4><p style="margin:0">Experiencia en trabajo con instituciones educativas para acompañar la implementación, la recolección de datos y los ajustes sobre la marcha.</p></div>
+    </div>
+  </article>
+
+  <article class="subpanel" data-subpanel="asignacion" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Equipos de codirección escalonada</p><h2>Asignación de dirección de trabajos de grado</h2></div>
+      <p class="meta">31 profesores<br>8 equipos de dirección</p>
+    </div>
+    <div class="prose">
+      <p>La asignación de dirección de trabajos de grado en la Maestría en Innovación Educativa organiza el acompañamiento de los estudiantes a través de equipos de codirección escalonada. Cada equipo está integrado por un director/a con doctorado terminado y trayectoria investigativa consolidada, y por dos a cuatro coasesores que acompañan de manera directa el desarrollo del trabajo. Para conformar los equipos se revisa el perfil de los profesores de la Escuela mediante un sondeo con un instrumento de caracterización docente y la consulta de sus CvLAC.</p>
+    </div>
+    <h3>Criterios de conformación</h3>
+    <div class="criteria">
+      <div class="box"><h4>Trayectoria</h4><p style="margin:0">Entre los doctores y quienes cursan doctorado se considera la producción registrada (artículos, libros, capítulos y proyectos), las tesis dirigidas, en especial de maestría, y la categoría de investigador en Minciencias.</p></div>
+      <div class="box"><h4>Afinidad temática</h4><p style="margin:0">Cada coasesor/a se ubica con el director/a cuyos temas, líneas de trabajo y de investigación o proyectos coinciden con los suyos y, cuando es posible, con quien ya tiene coautorías o trabajo conjunto.</p></div>
+    </div>
+    <div class="prose" style="margin-top:1.75rem">
+      <p>Asimismo, se procura que cada equipo reúna las experticias complementarias que exige el tipo de trabajo de grado de la maestría, centrado en diseñar, implementar y evaluar una innovación en el aula. Estas experticias son el rigor metodológico para convertir la implementación en evidencia defendible, la pertinencia disciplinar sobre el contenido que se enseña y la cercanía al aula para acompañar la implementación, la recolección de datos y los ajustes sobre la marcha.</p>
+      <p>De este modo, los 31 profesores se agrupan en ocho equipos organizados por afinidad con las líneas de investigación. En cinco de ellos, uno de los coasesores cursa estudios doctorales y se proyecta como relevo natural del director/a. En conjunto, este proceso busca una asignación pertinente, equilibrada y coherente con las líneas del programa, y amplía de forma progresiva la capacidad institucional de dirección de trabajos de grado.</p>
+    </div>
+  </article>
+
+  <article class="subpanel" data-subpanel="director" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Rol</p><h2>Director/a de Trabajo de Grado</h2></div>
+    </div>
+    <div class="role">
+      <div>
+        <p class="purpose">Orientar las decisiones metodológicas y conceptuales del trabajo de grado, garantizando su rigor investigativo y su pertinencia disciplinar, y liderar el equipo de codirección.</p>
+        <h4>Funciones principales</h4>
+        <ul class="funcs">
+          <li>Orientar el enfoque conceptual y metodológico del proyecto.</li>
+          <li>Aprobar el diseño de investigación y la estrategia de evaluación de la innovación (diseños cuantitativos, cualitativos o mixtos, validación de instrumentos).</li>
+          <li>Acompañar y aprobar el análisis de resultados y la discusión.</li>
+          <li>Validar la calidad académica de la versión final del trabajo de grado.</li>
+          <li>Apoyar la toma de decisiones investigativas en los momentos clave del proceso.</li>
+          <li>Orientar y retroalimentar al coasesor/a, favoreciendo su formación en la dirección de trabajos de grado.</li>
+        </ul>
+      </div>
+      <aside class="aside">
+        <h4>Tipo de acompañamiento</h4>
+        <p>Autónomo y personalizado, no regular. Se concentra en los momentos decisivos del proceso (diseño, análisis y versión final), mediante encuentros puntuales acordados con el estudiante y en articulación permanente con el coasesor/a.</p>
+      </aside>
+    </div>
+  </article>
+
+  <article class="subpanel" data-subpanel="coasesor" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Rol</p><h2>Coasesor/a de Trabajo de Grado</h2></div>
+    </div>
+    <div class="role">
+      <div>
+        <p class="purpose">Acompañar de manera cercana el avance del estudiante, articulando las orientaciones del director/a con el desarrollo práctico del proyecto.</p>
+        <h4>Funciones principales</h4>
+        <ul class="funcs">
+          <li>Hacer seguimiento continuo al avance del trabajo según el cronograma y los entregables.</li>
+          <li>Acompañar la implementación de la innovación en el aula y la recolección de datos.</li>
+          <li>Orientar la escritura académica y la coherencia entre problema, diseño, intervención y resultados.</li>
+          <li>Apoyar ajustes sobre la marcha durante el trabajo de campo.</li>
+          <li>Mediar entre el estudiante y el director/a, informando avances y dificultades.</li>
+          <li>Verificar el cumplimiento de los lineamientos éticos durante la implementación.</li>
+        </ul>
+      </div>
+      <aside class="aside">
+        <h4>Tipo de acompañamiento</h4>
+        <p>Cercano, frecuente y continuo. Se desarrolla mediante encuentros periódicos, idealmente semanales, acordados con el estudiante, en articulación con el director/a.</p>
+      </aside>
+    </div>
+    <div class="compare">
+      <h3>Director/a y coasesor/a, lado a lado</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Aspecto</th><th scope="col">Director/a</th><th scope="col">Coasesor/a</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Foco</th><td>Decisiones metodológicas y conceptuales</td><td>Avance, implementación y escritura</td></tr>
+          <tr><th scope="row">Frecuencia</th><td>Encuentros puntuales en momentos decisivos</td><td>Encuentros periódicos, idealmente semanales</td></tr>
+          <tr><th scope="row">Aprueba</th><td>Diseño, análisis y versión final</td><td>Cumplimiento del cronograma y de los entregables</td></tr>
+          <tr><th scope="row">Relación con el equipo</th><td>Lidera y forma al coasesor/a</td><td>Media entre el estudiante y el director/a</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </article>
+
+  <article class="subpanel" data-subpanel="estructura-img" hidden>
+    <div class="lead-head">
+      <div><p class="kicker">Organización</p><h2>Estructura de los equipos de dirección</h2></div>
+    </div>
+    <figure>
+      <div class="figure-frame">
+        <!-- ✏️ Coloca tu imagen en la misma carpeta con el nombre estructura.png (o cambia el src) -->
+        <img src="estructura.png" alt="Esquema de la estructura de los equipos de dirección de trabajos de grado de la MIE" id="estructura-img">
+        <div class="img-missing" id="img-missing" hidden>
+          <p>Aquí se mostrará el esquema de la estructura de los equipos.</p>
+          <p style="margin:0">Sube la imagen al repositorio, junto a <code>index.html</code>, con el nombre <code>estructura.png</code>.</p>
+        </div>
+      </div>
+      <figcaption>Estructura de los equipos de codirección escalonada de la Maestría en Innovación Educativa.</figcaption>
+    </figure>
+  </article>
+</section>
+</main>
+
+<footer>
+  <p class="author">Elaborado por María del Pilar García-Chitiva ©</p>
+  <p class="rights">Todos los derechos reservados 2026</p>
+</footer>
+
+<script>
+/* ================== DATOS ================== */
+const ENTREGAS = {
+  "sem1": [
+    {t:"Exploración inicial y argumentación del problema", w:"Argumento básico inicial de la investigación y necesidad de cambio en el escenario educativo",
+     i:["Tema de interés del trabajo","Enunciación del interés de innovación educativa","Tesis: enunciado, frase o pregunta inicial","Conceptos base de la investigación","Aproximación inicial al método o procedimiento","Antecedentes preliminares que sustenten la idea","Construcción inicial de consideraciones éticas"]},
+    {t:"Profundización conceptual y metodológica inicial", w:"Avance estructurado del proyecto de investigación",
+     i:["Tema de interés consolidado","Enunciación del interés de innovación educativa","Pregunta o tesis de investigación refinada","Marco conceptual inicial (conceptos y relaciones)","Revisión de antecedentes (búsqueda bibliográfica inicial)","Primera versión del diseño metodológico, con aspectos éticos"]},
+    {t:"Evaluación formativa y ajuste del proyecto", w:"Sustentación del avance del proyecto",
+     i:["Presentación oral del proceso desarrollado","Retroalimentación del tutor/a","Proyección de ajustes para la entrega final"]},
+    {t:"Consolidación del anteproyecto", w:"Documento final de Seminario I (anteproyecto inicial)",
+     i:["Tema de interés","Enunciación del interés de innovación educativa","Pregunta o tesis definitiva","Marco conceptual","Antecedentes consolidados","Diseño metodológico inicial","Consideraciones éticas de la investigación"]}
+  ],
+  "sem2": [
+    {t:"Consolidación del anteproyecto y refinamiento metodológico", w:"Anteproyecto de investigación en versión consolidada",
+     i:["Pregunta de investigación consolidada","Objetivos de investigación","Marco conceptual que sustenta la investigación","Antecedentes (fundamentos empíricos)","Hipótesis o posible respuesta (opcional)","Versión inicial del método, orientada a la implementación"]},
+    {t:"Diseño metodológico detallado e inicio de implementación", w:"Profundización metodológica del proyecto",
+     i:["Pregunta, objetivos, marco conceptual y antecedentes","Tipo y diseño de la investigación","Caracterización de participantes (selección y asignación)","Técnicas e instrumentos de recolección de información","Diseño de la intervención o estrategia de innovación"]},
+    {t:"Evaluación formativa del proceso metodológico", w:"Sustentación del avance metodológico",
+     i:["Presentación del diseño metodológico y avances de implementación","Retroalimentación del tutor/a y ajustes al diseño","Proyección de ajustes para la entrega final"]},
+    {t:"Consolidación metodológica e implementación inicial", w:"Documento final de Seminario II",
+     i:["Pregunta, objetivos, marco conceptual y antecedentes","Tipo y diseño de investigación","Participantes","Técnicas e instrumentos de recolección","Diseño de la intervención o estrategia de innovación","Estrategias de análisis: criterios, pasos, operaciones y formas de presentación","Instrumentos diseñados y descripción inicial de la implementación"]}
+  ],
+  "tg": [
+    {t:"Avance en análisis de datos y estructura del documento", w:"Documento con primeros resultados y análisis preliminar (semana 8)",
+     i:["Título, autor(es) y filiación institucional","Resumen e introducción","Métodos","Resultados: inicio del análisis de datos","Discusión y conclusiones preliminares","Referencias, aspectos éticos y anexos"]},
+    {t:"Profundización en análisis y resultados", w:"Documento con resultados avanzados (semana 12)",
+     i:["Título, autor(es) y filiación institucional","Resumen e introducción","Métodos","Resultados: análisis consolidado o en fase avanzada","Discusión y conclusiones en desarrollo","Referencias, aspectos éticos y anexos"]},
+    {t:"Evaluación formativa del proceso investigativo", w:"Sustentación del trabajo de grado (semana 14)",
+     i:["Presentación de resultados y avances finales","Retroalimentación del director/a","Ajustes para la entrega final"]},
+    {t:"Consolidación del documento final (modelo IMRyD)", w:"Documento final de trabajo de grado (semana 15)",
+     i:["Título y autor(es) con filiación institucional","Introducción","Método","Resultados","Discusión","Referencias en normas APA 7.ª edición","Integración completa: coherencia, estilo y estructura"]}
+  ]
+};
+const MATRIX = [["Enfoque", "Diseño", "Ejemplos de muestra", "Tamaño de muestra y viabilidad", "Tiempo de implementación", "Tipos de implementación en el aula (innovación educativa)", "Ejemplos de instrumentos", "Dónde encontrar los instrumentos", "Qué tener en cuenta para no comprometer la validez"], ["Cuantitativo (cuasiexperimental)", "Series cronológicas interrumpidas de un solo grupo\n• Equivale al «Diseño 7» de Campbell y Stanley: mediciones repetidas antes y después de la intervención, sin grupo de comparación.", "• Un aula intacta (unidocente rural, multigrado o de un solo grado), entre 15 y 30 estudiantes.\n• Muestreo no probabilístico, por conveniencia o intencional (grupo disponible para el investigador).", "Viable de 15 a 30 estudiantes con estadística no paramétrica (Wilcoxon) sobre la serie. Entre 10 y 14: defendible, pero reportar como tendencia descriptiva y con tamaños del efecto, no como prueba inferencial concluyente. Por debajo de 10: migrar a un diseño de caso único con línea de base múltiple (última fila de la matriz).", "• 6 a 8 semanas (dentro del máximo de uno a dos meses).\n• Mínimo 3 mediciones antes y 3 después de la intervención (idealmente 4+4).", "• Mediación tecnológica: aplicación gamificada, recurso digital interactivo o plataforma adaptativa para un contenido curricular.\n• Mediación metodológica: aula invertida, aprendizaje basado en problemas, tutoría entre pares, rutinas de pensamiento.\n• Variable de logro: desempeño académico en un área, comprensión lectora, pensamiento matemático o convivencia escolar.", "• Pruebas de desempeño de aplicación repetida (formas paralelas o la misma prueba con distancia temporal).\n• Listas de cotejo de observación de aula.\n• Rúbricas de desempeño.\n• Escalas breves de actitud, motivación o clima de aula de aplicación periódica.", "• Preguntas liberadas de pruebas Saber (ICFES / Ministerio de Educación).\n• Escalas publicadas en artículos indexados (Scopus / Web of Science) que reporten sus propiedades psicométricas.\n• Repositorios académicos: Redalyc, Redined, ERIC.\n• Instrumentos citables de tesis doctorales de acceso abierto.", "• Historia: es la amenaza principal; el diseño no controla eventos externos coincidentes con el punto de intervención. Llevar un diario/registro de acontecimientos institucionales o del aula durante todo el periodo (Campbell y Stanley, 1966/2005).\n• Maduración y administración de pruebas: al operar de forma similar en toda la serie, un salto abrupto justo en el punto de intervención es más difícil de atribuir solo a estos factores; aun así, evitar fatiga o efecto de práctica usando formas paralelas cuando sea posible.\n• Instrumentación: usar siempre el mismo instrumento, el mismo aplicador y el mismo protocolo de calificación en todas las mediciones; documentar cualquier cambio de observador o codificador.\n• Aislamiento experimental: limitar, en lo posible, la exposición del grupo a otras fuentes de estímulo relacionadas con la variable estudiada durante el periodo de medición.\n• Analizar el patrón completo de la serie (no solo el contraste antes/después) para descartar tendencias previas o regresión hacia la media si el grupo fue seleccionado por puntajes extremos."], ["Cuantitativo (cuasiexperimental)", "Series cronológicas múltiples con grupo de comparación no aleatorizado\n• Extensión del diseño anterior («Diseño 14» de Campbell y Stanley): se añade una serie de mediciones «de control» en un grupo similar que no recibe la intervención.", "• Dos grupos intactos comparables (dos paralelos del mismo grado en la misma institución, o dos escuelas rurales cercanas con características socioeducativas similares).\n• Entre 15 y 30 estudiantes por grupo; muestreo intencional por disponibilidad y semejanza.", "Viable con 15 a 20 estudiantes por grupo. Entre 10 y 14 por grupo: usar comparación descriptiva de tendencias entre las dos series, no pruebas inferenciales entre grupos. Por debajo de 10 por grupo: no recomendable como comparación de grupos; tratar las dos aulas como línea de base múltiple entre entornos (última fila de la matriz).", "• Mismo esquema temporal en ambos grupos: 6 a 8 semanas.\n• Al menos 3-4 mediciones antes y después de la intervención en el grupo experimental; el grupo de comparación recibe las mismas mediciones en los mismos momentos, sin la intervención.", "• Las mismas opciones de mediación tecnológica o metodológica de la fila anterior, aplicadas solo al grupo experimental.\n• El grupo de comparación continúa con la práctica pedagógica habitual del docente.", "• Idénticos instrumentos aplicados a ambos grupos en los mismos momentos: pruebas de logro, escalas de convivencia o clima de aula, listas de cotejo estandarizadas.", "• Las mismas fuentes de la fila anterior (bancos de pruebas oficiales, escalas validadas publicadas, repositorios académicos).", "• Controla mejor la historia y la maduración que la serie de un solo grupo, porque ambos grupos comparten en gran medida el mismo contexto temporal y de desarrollo (Campbell y Stanley, 1966/2005).\n• Amenaza principal: interacción selección-maduración; los dos grupos intactos pueden tener ritmos de desarrollo distintos. Recolectar una línea de base (varias mediciones previas a X) en ambos grupos para verificar que sus tendencias eran paralelas antes de la intervención.\n• Instrumentación y administración de pruebas: mismo instrumento, mismos aplicadores y mismo calendario en los dos grupos.\n• Registrar formalmente los criterios de semejanza entre los dos grupos (nivel socioeconómico, desempeño previo, características del docente) para sustentar la comparabilidad."], ["Cuantitativo (cuasiexperimental)", "Grupo de control no equivalente (un solo pretest y postest)\n• Corresponde al «Diseño 10» de Campbell y Stanley: dos grupos intactos, ambos con pretest y postest, sin asignación aleatoria a los grupos.", "• Dos grupos intactos (paralelos del mismo grado o dos aulas de escuelas similares), 15 a 30 estudiantes cada uno.\n• Útil cuando los recursos solo permiten una medición antes y otra después, no una serie completa.", "Viable con al menos 15 estudiantes por grupo para aplicar ANCOVA con algo de estabilidad. Entre 10 y 14 por grupo: usar prueba U de Mann-Whitney (no paramétrica) y presentar los resultados como evidencia preliminar. Por debajo de 10 por grupo: diseño no recomendable; no hay base suficiente para ningún análisis de grupo.", "• 4 a 6 semanas entre pretest y postest, dentro del límite de uno a dos meses del contexto.", "• Mediación tecnológica o metodológica aplicada únicamente al grupo experimental durante el periodo entre pretest y postest; el grupo de control mantiene la práctica habitual.", "• Pruebas de conocimiento o desempeño con dos formas (pretest/postest) o la misma prueba con intervalo suficiente.\n• Escalas de convivencia, motivación o percepción del clima de aula.", "• Bancos de ítems liberados del ICFES, escalas validadas en artículos indexados, repositorios académicos (Redalyc, Redined, ERIC).", "• Controla los efectos principales de historia, maduración, administración de pruebas e instrumentación si ambos grupos comparten el mismo calendario y contexto institucional (Campbell y Stanley, 1966/2005).\n• Amenaza principal: interacción selección-maduración; comparar estadísticamente los puntajes de pretest para verificar equivalencia inicial, y usar análisis de covarianza (ANCOVA) en lugar de puntajes de ganancia simples o de emparejamiento (equiparación) por separado.\n• Precaución con la regresión estadística: si alguno de los grupos fue seleccionado por puntajes extremos, cualquier diferencia pretest-postest puede deberse a regresión y no a la intervención; evitar seleccionar grupos por ese criterio.\n• No sustituir la aleatorización por «equiparación» de sujetos entre grupos: según Campbell y Stanley, cuando las medias de los grupos difieren sustancialmente, la equiparación no logra la igualación pretendida y puede introducir efectos de regresión no deseados."], ["Cualitativo", "Estudio de caso único con seguimiento\n• El aula (o la implementación pedagógica dentro de ella) se constituye como «el caso»; puede incluir unidades embebidas (subgrupos de estudiantes, el docente, la institución).", "• El aula completa como caso; muestreo intencional de participantes para entrevistas o grupos focales (por ejemplo, 6 a 10 estudiantes y el docente).\n• No probabilístico; se prioriza la riqueza de información, no la representatividad estadística.", "No exige un mínimo estadístico: viable desde 1 caso (el aula completa o un solo estudiante) hasta el grupo completo. El criterio de suficiencia es la saturación de la información, no el número de participantes.", "• 6 a 8 semanas de trabajo de campo, con observaciones periódicas (por ejemplo, semanales) antes, durante y después de la implementación.", "• La innovación (mediación tecnológica o metodológica) se documenta como el fenómeno central del caso, describiendo en profundidad su puesta en marcha, los ajustes realizados y las reacciones de los participantes.", "• Guías de entrevista semiestructurada.\n• Protocolos de observación participante y no participante.\n• Diario de campo del investigador.\n• Análisis documental (portafolios, planeaciones de clase, producciones de los estudiantes).\n• Grupos focales.", "• Guías de entrevista y protocolos de observación adaptados de estudios previos publicados en revistas de innovación educativa (por ejemplo, Comunicar, Educación XX1, Revista de Investigación Educativa).\n• Manuales metodológicos especializados (Yin, 2018; Stake, 1995).", "• Este diseño no se evalúa con los criterios de validez interna y externa de Campbell y Stanley (pensados para diseños causales cuantitativos), sino con los criterios de rigor propios de la investigación naturalista (Lincoln y Guba, 1985).\n• Credibilidad: triangular fuentes, métodos e informantes; realizar verificación con los participantes (member checking).\n• Transferibilidad: ofrecer una descripción densa (thick description) del contexto (tipo de aula, características socioeducativas) para que otros lectores valoren la aplicabilidad a contextos similares.\n• Dependencia (dependability): mantener un registro auditable de las decisiones metodológicas (audit trail).\n• Confirmabilidad: declarar la reflexividad del investigador, en particular cuando el docente-investigador participa directamente en la implementación (rol de observador-participante)."], ["Mixto (convergente o embebido)", "Diseño mixto de un solo grupo: series cortas + estudio de caso\n• Integra, en el mismo grupo y en el mismo periodo, una hebra cuantitativa (series de mediciones breves) y una hebra cualitativa (estudio de caso), articuladas mediante una matriz de convergencia (Creswell y Plano Clark, 2018).", "• El aula completa (15-30 estudiantes) para los datos cuantitativos.\n• Un subgrupo intencional (estudiantes y docente) para los datos cualitativos.", "No tiene mínimo de participantes. La hebra cuantitativa hereda el umbral de la primera fila: recomendable desde 15, viable con ajustes no paramétricos desde 10-12, y con menos de 10 conviene tratar esos datos como series de casos individuales dentro del mismo diseño mixto.", "• 6 a 8 semanas; las mediciones cuantitativas se recogen periódicamente (como en la primera fila) y los datos cualitativos se recolectan en paralelo durante todo el periodo.", "• La misma innovación (mediación tecnológica o metodológica) se valora simultáneamente por su efecto en el desempeño o la convivencia (datos cuantitativos) y por el sentido que estudiantes y docente le atribuyen a la experiencia (datos cualitativos).", "• Combina los instrumentos cuantitativos de la primera fila (pruebas, escalas, listas de cotejo) con los instrumentos cualitativos de la cuarta fila (entrevistas, observación, diario de campo).\n• Una matriz de convergencia o «joint display» para integrar ambas hebras en el análisis.", "• Las mismas fuentes señaladas en las filas anteriores para cada hebra (cuantitativa y cualitativa).", "• Debe atenderse simultáneamente a las amenazas a la validez interna y externa de la hebra cuantitativa (historia, instrumentación, aislamiento experimental; ver primera fila) y a los criterios de credibilidad y transferibilidad de la hebra cualitativa (ver cuarta fila).\n• Se recomienda documentar explícitamente la «legitimación» del diseño mixto: la coherencia entre lo que muestran los datos cuantitativos y lo que revelan los datos cualitativos, evidenciada en la matriz de convergencia (Creswell y Plano Clark, 2018).\n• Cuando ambas hebras diverjan, no forzar una conclusión única: reportar la divergencia como hallazgo y discutir posibles explicaciones."], ["Cuantitativo (diseño de caso único / SCED)", "Línea de base múltiple entre participantes, conductas o entornos (o diseño A-B-A-B)\n• Cada estudiante (o subgrupo de 2-3) se trata como su propio caso; la intervención se introduce en momentos escalonados entre casos (línea de base múltiple) o se retira y reintroduce en el mismo caso (A-B-A-B). Esto permite establecer causalidad sin necesitar un grupo de comparación numeroso (Horner et al., 2005; Kratochwill et al., 2010).", "• El aula completa dividida en casos individuales o pequeños subgrupos (2-3 estudiantes).\n• Especialmente indicado cuando el grupo total es demasiado pequeño para un análisis de grupo (filas 1 a 3).", "Es la opción recomendada cuando el grupo tiene menos de 10-12 estudiantes. Viable desde 1 caso; para línea de base múltiple se recomienda un mínimo de 3 casos o entornos escalonados, ya que ese escalonamiento es lo que aporta la fuerza probatoria del diseño (Kratochwill et al., 2010).", "• 6 a 8 semanas; cada caso requiere una línea de base estable (mínimo 3-5 mediciones) antes de introducir la intervención, escalonada entre casos.", "• Mediación tecnológica o metodológica introducida de forma escalonada (un caso o subgrupo a la vez) o alternada (A-B-A-B) en el mismo caso.\n• Se evalúa un indicador puntual y medible: una conducta, un desempeño específico o un nivel de participación.", "• Mediciones repetidas y frecuentes de una conducta o desempeño puntual (conteo de errores, tiempo en tarea, frecuencia de participación).\n• Registro de observación directa o autoinforme breve, aplicado varias veces por semana.", "• Protocolos de medición repetida usados en estudios de diseño de caso único publicados en revistas de educación especial o análisis aplicado de la conducta.\n• Estándares de diseño y documentación técnica del What Works Clearinghouse (Kratochwill et al., 2010).", "• Amenaza principal: estabilidad de la línea base; no introducir la intervención hasta que los datos de línea base muestren una tendencia estable.\n• El escalonamiento entre casos (mínimo 3) es lo que permite descartar la historia como explicación alternativa: si el cambio ocurre justo cuando cada caso recibe la intervención, y no antes, la evidencia causal es sólida.\n• Análisis principalmente visual de las gráficas de cada caso, complementado con tamaños del efecto de no solapamiento (Tau-U, PND) en lugar de pruebas de significancia grupales (Kazdin, 2021)."]];
+const AVOID = ["Diseños experimentales “verdaderos” con asignación aleatoria a grupos (Diseños 4, 5 o 6 de Campbell y Stanley): requieren un marco muestral amplio y control administrativo sobre la asignación de estudiantes, condiciones no disponibles en un aula única.", "El estudio de caso con una sola medición y el diseño pretest-postest de un solo grupo sin serie temporal (Diseños 1 y 2, «preexperimentales»): según Campbell y Stanley, prácticamente todas las fuentes de invalidación interna quedan sin controlar en estos diseños; no se recomiendan como diseño principal de un trabajo de grado, aunque sí pueden orientar un ejercicio diagnóstico previo.", "Sustituir la aleatorización por “equiparación” (matching) de grupos como única estrategia de control: puede introducir artificialmente efectos de regresión estadística (Campbell y Stanley, 1966/2005).", "Comparaciones estadísticas inferenciales que asuman representatividad poblacional a partir de una muestra de 15-30 estudiantes: los hallazgos deben interpretarse como evidencia del caso o del grupo estudiado, no generalizarse sin evidencia adicional.", "Aplicar pruebas estadísticas de grupo (t de Student, ANCOVA) con menos de 10 estudiantes por grupo: la potencia es demasiado baja y los supuestos de normalidad no pueden verificarse razonablemente. En ese caso, usar estadística no paramétrica o migrar a un diseño de caso único con línea de base múltiple (última fila de la matriz), que sí está validado metodológicamente para muestras tan pequeñas (Horner et al., 2005; Kratochwill et al., 2010)."];
+
+/* ================== UTILIDADES ================== */
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function richText(txt){
+  const lines = txt.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+  let html="", list=[];
+  const flush=()=>{ if(list.length){ html+="<ul>"+list.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>"; list=[]; } };
+  lines.forEach(l=>{ if(/^[•\-]/.test(l)) list.push(l.replace(/^[•\-]\s*/,"")); else { flush(); html+="<p>"+esc(l)+"</p>"; } });
+  flush(); return html;
+}
+
+/* ================== ENTREGAS ================== */
+Object.entries(ENTREGAS).forEach(([k,arr])=>{
+  document.getElementById("entregas-"+k).innerHTML = arr.map((e,n)=>`
+    <li class="entrega">
+      <div class="num" aria-hidden="true">${n+1}<small>Entrega</small></div>
+      <div><h4><span class="sr">Entrega ${n+1}. </span>${esc(e.t)}</h4><p class="what">${esc(e.w)}</p>
+      <ul>${e.i.map(x=>"<li>"+esc(x)+"</li>").join("")}</ul></div>
+    </li>`).join("");
+});
+
+/* ================== DISEÑOS ================== */
+const HEAD = MATRIX[0];
+const ROWS = MATRIX.slice(1).map((r,idx)=>{
+  const lines = r[1].split(/\n+/);
+  return {id:idx, enfoque:r[0].trim(), nombre:lines[0].trim(), resumen:lines.slice(1).join("\n"), cells:r};
+});
+const shortEnf = e => e.startsWith("Mixto") ? "Mixto" : e.startsWith("Cualitativo") ? "Cualitativo" : /caso único/i.test(e) ? "Caso único" : "Cuantitativo";
+const ENFOQUES = ["Todos", ...new Set(ROWS.map(r=>shortEnf(r.enfoque)))];
+let currentFilter = "Todos", currentDesign = 0;
+
+function renderFilters(){
+  document.getElementById("filters").innerHTML = ENFOQUES.map(f=>
+    `<button class="chip" aria-pressed="${f===currentFilter}" data-f="${esc(f)}">${esc(f)}</button>`).join("");
+}
+function renderList(){
+  const vis = ROWS.filter(r=>currentFilter==="Todos"||shortEnf(r.enfoque)===currentFilter);
+  if(!vis.some(r=>r.id===currentDesign)) currentDesign = vis[0].id;
+  document.getElementById("design-list").innerHTML = vis.map(r=>
+    `<li><button class="design-btn" data-d="${r.id}" aria-current="${r.id===currentDesign}"><span class="enf">${esc(r.enfoque)}</span><span class="dn">${esc(r.nombre)}</span></button></li>`).join("");
+  renderDetail();
+}
+function renderDetail(){
+  const r = ROWS.find(x=>x.id===currentDesign);
+  const f = (i,cls="") => `<div class="fact ${cls}"><h4>${esc(HEAD[i])}</h4>${richText(r.cells[i])}</div>`;
+  document.getElementById("design-detail").innerHTML = `
+    <p class="enf">${esc(r.enfoque)}</p>
+    <h3>${esc(r.nombre)}</h3>
+    ${r.resumen ? `<div class="summary">${richText(r.resumen)}</div>` : ""}
+    <div class="facts">
+      ${f(2)}${f(3)}${f(4)}${f(5)}${f(6)}${f(7)}${f(8,"wide alert")}
+    </div>`;
+}
+document.getElementById("filters").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return;
+  currentFilter=b.dataset.f; renderFilters(); renderList();
+});
+document.getElementById("design-list").addEventListener("click",e=>{
+  const b=e.target.closest(".design-btn"); if(!b) return;
+  currentDesign=+b.dataset.d; renderList();
+  if(window.innerWidth<900) document.getElementById("design-detail").scrollIntoView({behavior:"smooth",block:"start"});
+});
+renderFilters(); renderList();
+
+document.getElementById("matrix-table").innerHTML =
+  "<thead><tr>"+HEAD.map(h=>`<th scope="col">${esc(h)}</th>`).join("")+"</tr></thead><tbody>"+
+  MATRIX.slice(1).map(r=>"<tr>"+r.map(c=>`<td>${richText(c)}</td>`).join("")+"</tr>").join("")+"</tbody>";
+document.getElementById("toggle-matrix").addEventListener("click",function(){
+  const m=document.getElementById("matrix"), open=m.hidden;
+  m.hidden=!open; this.setAttribute("aria-expanded",open);
+  this.textContent = open ? "Ocultar la matriz completa" : "Ver la matriz completa";
+});
+document.getElementById("avoid").innerHTML = AVOID.map(a=>"<li>"+esc(a)+"</li>").join("");
+
+/* ================== IMAGEN ================== */
+const img=document.getElementById("estructura-img");
+const showMissing=()=>{img.style.display="none";document.getElementById("img-missing").hidden=false;};
+img.addEventListener("error",showMissing);
+if(img.complete && img.naturalWidth===0) showMissing();
+
+/* ================== NAVEGACIÓN ================== */
+const DEFAULT_SUB = {estructura:"sem1", directores:"asesoria"};
+function go(tab, sub, push=true){
+  if(!DEFAULT_SUB[tab]) tab="estructura";
+  const panel=document.getElementById("p-"+tab);
+  if(!panel.querySelector(`[data-subpanel="${sub}"]`)) sub=DEFAULT_SUB[tab];
+  document.querySelectorAll(".tab-main").forEach(t=>{
+    const on=t.dataset.tab===tab; t.setAttribute("aria-selected",on); t.tabIndex=on?0:-1;
+  });
+  document.querySelectorAll(".panel").forEach(p=>p.hidden = p.id!=="p-"+tab);
+  panel.querySelectorAll(".subtab").forEach(s=>{
+    const on=s.dataset.sub===sub; s.setAttribute("aria-selected",on); s.tabIndex=on?0:-1;
+  });
+  panel.querySelectorAll(".subpanel").forEach(s=>s.hidden = s.dataset.subpanel!==sub);
+  if(push) history.replaceState(null,"","#"+tab+"/"+sub);
+}
+function keyNav(e,sel){
+  if(!["ArrowRight","ArrowLeft","Home","End"].includes(e.key)) return;
+  const list=[...e.currentTarget.querySelectorAll(sel)];
+  let i=list.indexOf(document.activeElement);
+  if(i<0) return;
+  i = e.key==="Home"?0 : e.key==="End"?list.length-1 : (i+(e.key==="ArrowRight"?1:-1)+list.length)%list.length;
+  list[i].focus(); list[i].click(); e.preventDefault();
+}
+document.querySelector(".tabs-main .wrap").addEventListener("click",e=>{
+  const t=e.target.closest(".tab-main"); if(!t) return;
+  const tab=t.dataset.tab;
+  const current=[...document.querySelectorAll(`#p-${tab} .subtab`)].find(s=>s.getAttribute("aria-selected")==="true");
+  go(tab, current?current.dataset.sub:DEFAULT_SUB[tab]);
+});
+document.querySelector(".tabs-main .wrap").addEventListener("keydown",e=>keyNav(e,".tab-main"));
+document.querySelectorAll(".panel").forEach(p=>{
+  const bar=p.querySelector(".subtabs");
+  bar.addEventListener("click",e=>{const s=e.target.closest(".subtab"); if(s) go(p.id.slice(2), s.dataset.sub);});
+  bar.addEventListener("keydown",e=>keyNav(e,".subtab"));
+});
+document.querySelectorAll(".station").forEach(s=>s.addEventListener("click",()=>{
+  const [t,sub]=s.dataset.go.split("/"); go(t,sub);
+  document.querySelector(".tabs-main").scrollIntoView({behavior:"smooth"});
+}));
+const [h1,h2]=location.hash.replace("#","").split("/");
+go(h1||"estructura", h2||"", false);
+window.addEventListener("hashchange",()=>{const [a,b]=location.hash.replace("#","").split("/");go(a||"estructura",b||"",false);});
+</script>
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style>
+</body>
+</html>
